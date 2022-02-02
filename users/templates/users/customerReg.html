@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+    .signup-page {
+        width: 450px;
+        padding: 2% 0 0;
+        margin: auto;
+    }
+
+    .signup-page .form .login {
+        margin-top: -25px;
+        margin-bottom: 30px;
+    }
+
+    .form {
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        max-width: 450px;
+        margin: 10px auto 100px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 30px 20px 0 rgba(0, 0, 0, 0.4), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .form input {
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f1f1f1;
+        width: 100%;
+        border: 1px;
+        margin: 0 0 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .form button {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background-image: linear-gradient(45deg, #474747, #cfcfcf);
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #000000;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+
+    .form .message {
+        margin: 15px 0 0;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    body {
+        background-image: linear-gradient(45deg, #ffffff, #616161);
+        font-family: "Roboto", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>
+<div class="signup-page">
+    <div class="form">
+        <div class="signup">
+            <div class="signup-header">
+                <h3>Customer Signup</h3>
+                <p>Please fill in this form to create an account.</p>
+            </div>
+        </div>
+        <form class="signup-form" method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <label for="user"><b>Username</b></label><br>
+                <input type="text" placeholder="Enter Username" name="username" required><br>
+                <label for="email"><b>Email</b></label><br>
+                <input type="email" placeholder="Enter Email" name="email" required><br>
+                <label for="phone_number"><b>Contact Number</b></label><br>
+                <input type="text" id="phone_number" maxlength="10" onkeypress="phoneno()" pattern="\d{10}"
+                    placeholder="Enter Contact Number" name="phone_number" required><br>
+                <label for="address"><b>Address</b></label><br>
+                <input type="text" placeholder="Enter Address" name="address" required><br>
+                <label for="psw"><b>Password</b></label><br>
+                <input type="password" placeholder="Enter Password" name="password" required><br>
+                <label for="psw-repeat"><b>Confirm Password</b></label><br>
+                <input type="password" placeholder="Confirm Password" name="password2" required><br>
+                <br>
+                <div class=" clearfix">
+                    <button type="submit" class="btn btn-info">Register Here</button>
+                </div>
+                <label for="">already registered?</label><br>
+                <a href="{% url 'customerlogin' %}" class=""> <strong>Login</strong> </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script>
+    function phoneno() {
+        $('#phone_number').keypress(function (e) {
+            var a = [];
+            var k = e.which;
+
+            for (i = 48; i < 58; i++)
+                a.push(i);
+
+            if (!(a.indexOf(k) >= 0))
+                e.preventDefault();
+        });
+    }
+</script>
+{% endblock %}

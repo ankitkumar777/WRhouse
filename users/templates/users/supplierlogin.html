@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+  
+    .login-page {
+      width: 360px;
+      padding: 8% 0 0;
+      margin: auto;
+    }
+  
+    .login-page .form .login {
+      margin-top: -31px;
+      margin-bottom: 26px;
+    }
+  
+    .form {
+      position: relative;
+      z-index: 1;
+      background: #FFFFFF;
+      max-width: 360px;
+      margin: 0 auto 100px;
+      padding: 45px;
+      text-align: center;
+      box-shadow: 20px 40px 0 rgba(0, 0, 0, 0.4), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+  
+    .form input {
+      font-family: "Roboto", sans-serif;
+      outline: 0;
+      background: #f1f1f1;
+      width: 100%;
+      border: 0;
+      margin: 0 0 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+  
+    .form button {
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      outline: 0;
+      background-image: linear-gradient(45deg, #cfcfcf, #474747 );
+      width: 100%;
+      border: 0;
+      padding: 15px;
+      color: #000000;
+      font-size: 14px;
+      -webkit-transition: all 0.3 ease;
+      transition: all 0.3 ease;
+      cursor: pointer;
+    }
+  
+    .form .message {
+      margin: 15px 0 0;
+      color: #000000;
+      font-size: 12px;
+    }
+  
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  
+    body {
+      background-image: linear-gradient(45deg, #616161, #ffffff);
+      font-family: "Roboto", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+<br>
+<div class="login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+                <h3>Supplier Login</h3>
+                <p>Please enter your credentials to login.</p>
+            </div>
+        </div>
+        <form class="login-form" method="POST">
+            {% csrf_token %}
+            <input type="text" id="login" class="fadeIn second" name="username" placeholder="username"><br>
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password"><br>
+            <br>
+            <button type="submit" class="btn btn-info">Login</button>
+            <p class="message">Not registered? </p>
+            <a class="dropdown-item" href="{% url 'supplierSignup' %}"><strong>Sign up</strong></a>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

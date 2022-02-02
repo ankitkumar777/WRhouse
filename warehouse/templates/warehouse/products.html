@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{%load crispy_forms_tags %}
+
+{% block content %}
+
+<br>
+<p><strong>Total Number of Products Available:</strong> {{product_count}}</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card card-body">
+                <p><strong>Search Your Products Here</strong></p>
+                <form method="get">
+                    {{searchfilter.form|crispy}}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card card-body">
+                <h5>Products</h5>
+            </div>
+            <div class="card card-body">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Brand</th>
+                            <th>Quantity</th>
+                            <th>supplier</th>
+                            <th>Location</th>
+                            <th>Admin Approval</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if product %}
+                        {% for i in page_obj %}
+                        <tr>
+                            <td>{{i.name}}</td>
+                            <td>{{i.category}}</td>
+                            <td>{{i.brand}}</td>
+                            <td>{{i.product_quantity}}</td>
+                            <td>{{i.supplier}}</td>
+                            <td>{{i.location}}</td>
+                            {% if i.admin_approved == 'Approved' %}
+                            <td><button class="btn btn-block btn-success">{{i.admin_approved}}</button></td>
+                            {% elif i.admin_approved == 'Unapproved' %}
+                            <td><button class="btn btn-block btn-danger">{{i.admin_approved}}</button></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+                <div>
+                    <span>
+                        {% if page_obj.has_previous %}
+                        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+                        {% endif %}
+                        <span>Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+                        {% if page_obj.has_next %}
+                        <a href="?page={{page_obj.next_page_number}}">Next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

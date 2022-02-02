@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'images/profile.webp' %}" alt="Profile image">
+                <div class="card-body">
+                    <h5 class="card-title">Supplier Profile</h5>
+                    <p class="card-text"><strong>Supplier: </strong>{{user.username}}</p>
+                    <p class="card-text"><strong>Email address: </strong>{{supplier.email}}</p>
+                    <p class="card-text"><strong>Phone Number: </strong>{{supplier.phone_number}}</p>
+                    <p class="card-text"><strong>Address: </strong>{{supplier.address}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <a class=" col-md-12 btn btn-info" href="{%url 'createproduct' supplier.id %}">Create Product</a>
+            <br>
+            <div class="col-md-12">
+                <p><strong>Total Number of Products:</strong> {{product_count}}</p>
+                <div class="card card-body">
+                    <h5>Products</h5>
+                </div>
+                <div class="card card-body">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th>Brand</th>
+                                <th>Quantity</th>
+                                <th>supplier</th>
+                                <th>Location</th>
+                                <th>Admin Approval</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if product %}
+                            {% for i in product %}
+                            <tr>
+                                <td>{{i.name}}</td>
+                                <td>{{i.category}}</td>
+                                <td>{{i.brand}}</td>
+                                <td>{{i.product_quantity}}</td>
+                                <td>{{i.supplier}}</td>
+                                <td>{{i.location}}</td>
+                                {% if i.admin_approved == 'Approved' %}
+                                <td><button class="btn btn-block btn-success">{{i.admin_approved}}</button></td>
+                                {% elif i.admin_approved == 'Unapproved' %}
+                                <td><button class="btn btn-block btn-danger">{{i.admin_approved}}</button></td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

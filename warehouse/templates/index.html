@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="bodywms">
+<!-- Background image -->
+</div>
+
+<section class="py-5" id="about">
+    <div class="container py-xl-5 py-lg-3">
+        <h3 class="heading mb-4">About Us</h3>
+        <div class="row">
+            <div class="col-lg-6">
+                <p class="mb-4 text-justify">
+                    <i>A place that manages all products within the warehouse</i>
+                    <br>
+                    A Warehouse Management application is a tool that provides automation to the tasks of their
+                    customers and supplier also.
+                    All the necessary tasks related to management can be easily handled using the best management tool.
+                    It maintains a record of every customers and suppliers.It streamlines the flow of information across
+                    warehouse and helps effective decision making for customes, warehouse administration, suppliers
+                    and streamline operations in an efficient way.
+                </p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{%static 'images/img.jpg' %}" alt="image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

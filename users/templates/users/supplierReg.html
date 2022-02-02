@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+    .signup-page {
+        width: 450px;
+        padding: 2% 0 0;
+        margin: auto;
+    }
+
+    .signup-page .form .login {
+        margin-top: -25px;
+        margin-bottom: 30px;
+    }
+
+    .form {
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        max-width: 450px;
+        margin: 10px auto 100px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 30px 20px 0 rgba(0, 0, 0, 0.4), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .form input {
+        font-family: "Roboto", sans-serif;
+        outline: 0;
+        background: #f1f1f1;
+        width: 100%;
+        border: 1px;
+        margin: 0 0 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .form button {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background-image: linear-gradient(45deg, #474747, #cfcfcf);
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #000000;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+
+    .form .message {
+        margin: 15px 0 0;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    body {
+        background-image: linear-gradient(45deg, #616161, #ffffff);
+        font-family: "Roboto", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>
+<div class="signup-page">
+    <div class="form">
+        <div class="signup">
+            <div class="signup-header">
+                <h3>Supplier Signup</h3>
+            </div>
+        </div>
+
+        <form action="{% url 'supplierSignup' %}" method="POST" class="signup-form">
+
+            {% csrf_token %}
+            <label for="username">Supplier Name</label>
+            {{ form.username }}<br>
+            <label for="email"> Supplier Email</label>
+            {{ form.email }}<br>
+            <label for="address">Supplier address</label>
+            {{ form.address }}<br>
+            <label for="phone_number">Contact Number</label>
+            {{ form.phone_number }}<br>
+            <label for="password">Password</label><br>
+            {{ form.password1 }}<br>
+            <label for="confirm">Confirm Password</label>
+            {{ form.password2 }}<br>
+            <br>
+            <div class=" clearfix">
+                <button type="submit" class="btn btn-info">Sign Up</button>
+            </div>
+        </form>
+
+        {{ form.errors }}
+
+        <label for="">already registered?</label><br>
+        <a href="{% url 'supplierlogin' %}" class=""> <strong>Login</strong> </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
