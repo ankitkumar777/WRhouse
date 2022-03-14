@@ -1,16 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
-from users.models import *
+from users.models import User
 
-@admin.register(Supplier)
+@admin.register(User)
 class SupplierAdmin(admin.ModelAdmin):
-    list_display = ('user', 'email')
-    ordering = ('user',)
+    list_display = ('email',)
 
-
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'email')
-    ordering = ('user',)
 

@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 import datetime
-from users.models import *
+from users.models import User
 
 class Product(models.Model):
     Product_Approval=(('Unapproved','Unapproved'),( 'Approved','Approved'))
@@ -11,7 +11,7 @@ class Product(models.Model):
     location= models.CharField(max_length=50)
     category = models.CharField(max_length=30, choices=Product_Category)
     brand = models.CharField(max_length=50)
-    supplier = models.ForeignKey(Supplier,on_delete=models.CASCADE)
+    supplier = models.ForeignKey(User,on_delete=models.CASCADE)
     admin_approved= models.CharField(max_length=50,default='Unapproved',choices=Product_Approval)
     product_quantity = models.PositiveIntegerField(default=1)
 
@@ -24,7 +24,7 @@ class Order(models.Model):
     order_date = models.DateField(default=datetime.date.today, null = True) 
     product = models.ForeignKey(Product, on_delete=models.CASCADE,null=True)
     quantity = models.PositiveIntegerField(default=1)
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
+    customer = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     status = models.CharField(max_length=50, choices=Order_Status, default='Pending')
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Delivery(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     delivery_status = models.CharField(max_length=50, choices=Delivery_Status)
     delivered_Date = models.DateField(default=datetime.date.today, null = True)
-    delievered_to = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    delievered_to = models.ForeignKey(User,on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Deliveries"

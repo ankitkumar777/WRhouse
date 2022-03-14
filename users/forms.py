@@ -9,10 +9,4 @@ class UserForm(UserCreationForm):
     email = forms.EmailField()
     class Meta:
             model = User
-            fields = ('username','email', 'phone_number', 'email', 'password1' ,'password2' )
-
-class CustomerForm(forms.ModelForm):
-    class Meta:
-        model = Customer
-        fields = '__all__'
-        exclude = ('customer_id','user',)
+            fields = ('email', 'phone_number', 'email', 'password1' ,'password2' )
