@@ -3,8 +3,9 @@ from django.db import models
 # Create your models here.
 
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-
-class UserManager(BaseUserManager):
+from django.contrib.auth.base_user import BaseUserManager
+from django.utils.translation import ugettext_lazy as _
+class CustomUserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, password=None):
         """
         Creates and saves a User with the given email, date of
@@ -30,7 +31,8 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class CustomUser(AbstractBaseUser):
+    username = models.CharField(max_length=255, null=True)
     email = models.EmailField(verbose_name='email address',max_length=255,unique=True,)
     date_of_birth = models.DateField()
     address = models.CharField(max_length=255, null=True)
@@ -38,7 +40,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    objects = UserManager()
+    objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['date_of_birth']

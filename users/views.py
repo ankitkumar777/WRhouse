@@ -1,34 +1,30 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect, HttpResponseRedirect,get_object_or_404
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.contrib.auth.models import Group
-from django.views.generic import View 
-from django.contrib import messages
-# Create your views here.
+# from django.shortcuts import render
+# from django.shortcuts import render, redirect, HttpResponseRedirect,get_object_or_404
+# from django.contrib.auth import login, authenticate, logout
+# from django.contrib.auth.decorators import login_required
+# from django.utils.decorators import method_decorator
+# from django.contrib.auth.models import Group
+# from django.views.generic import View 
+# from django.contrib import messages
+# # Create your views here.
 
-from users import models
-from users.forms import *
-# import from warehouse.
-from warehouse.decorators import *
-from warehouse import views, models
-
-
-
-
+# from users import models
+# from users.forms import *
+# # import from warehouse.
+# from warehouse.decorators import *
+# from warehouse import views, models
 
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import UserSerializer
-from .models import User
+from users.serializers import UserSerializer
+from users.models import CustomUser
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_of_birth')
+    queryset = CustomUser.objects.all().order_by('-date_of_birth')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
