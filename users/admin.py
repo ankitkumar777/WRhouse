@@ -5,6 +5,6 @@ from users.models import CustomUser
 
 @admin.register(CustomUser)
 class SupplierAdmin(admin.ModelAdmin):
-    list_display = ('email','username')
+    list_display = ['email']
 
 

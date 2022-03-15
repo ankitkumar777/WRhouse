@@ -2,9 +2,10 @@ from django.db import models
 
 # Create your models here.
 
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, password=None):
         """
@@ -12,7 +13,7 @@ class CustomUserManager(BaseUserManager):
         birth and password.
         """
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError(_('Users must have an email address'))
 
         user = self.model(email=self.normalize_email(email),date_of_birth=date_of_birth,)
 
@@ -30,9 +31,7 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
-class CustomUser(AbstractBaseUser):
-    username = models.CharField(max_length=255, null=True)
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='email address',max_length=255,unique=True,)
     date_of_birth = models.DateField()
     address = models.CharField(max_length=255, null=True)

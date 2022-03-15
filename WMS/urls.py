@@ -20,6 +20,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     # TokenVerifyView  # to verify the generated access token
 )
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
@@ -28,6 +31,12 @@ urlpatterns = [
     # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     path('warehouse/', include('warehouse.urls')),
-    path('users/', include('users.urls')),
-
 ]
+
+from rest_framework import routers
+router = routers.SimpleRouter()
+from users.views import UserViewSet
+
+router.register(r'users', UserViewSet,  basename='user')
+
+urlpatterns = urlpatterns + router.urls
